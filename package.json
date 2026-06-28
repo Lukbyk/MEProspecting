@@ -1,0 +1,35 @@
+{
+  "name": "prospecting-app",
+  "version": "0.1.0",
+  "description": "GUI operatora systemu prospectingowego Media Energetyczne (Electron + lokalny SQLite)",
+  "main": "main.js",
+  "author": "Łukasz Byczkowski",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "devDependencies": {
+    "electron": "^31.7.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1"
+  },
+  "build": {
+    "appId": "pl.mediaenergetyczne.prospecting",
+    "productName": "Prospecting",
+    "files": [
+      "main.js",
+      "preload.js",
+      "docs/**/*",
+      "db/**/*",
+      "renderer/**/*"
+    ],
+    "win": { "target": "nsis" },
+    "mac": { "target": "dmg" },
+    "linux": { "target": "AppImage" }
+  }
+}

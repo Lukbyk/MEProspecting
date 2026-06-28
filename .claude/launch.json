@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "gui-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "renderer", "-l", "5599"],
+      "port": 5599
+    }
+  ]
+}
