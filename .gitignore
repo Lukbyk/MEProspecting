@@ -18,3 +18,6 @@ backups/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Skróty Windows — specyficzne dla maszyny (operator ma maca)
+*.lnk
