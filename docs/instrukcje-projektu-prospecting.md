@@ -92,6 +92,29 @@ sourced → enriched → awaiting_selection → selected → sent → replied �
 
 ---
 
+## Orientacja: gdzie jestem → co dalej (punkt wejścia operatora)
+
+Gdy Operator pyta **„zaczynam proces — przeprowadź mnie"** albo **„zgubiłem się — co teraz"**:
+1. Zrób **snapshot żywej bazy** (`scripts/db-diagnose.js` albo `analityk_db.py browse`) — nie zgaduj ze stanu z głowy.
+2. Zlokalizuj wąskie gardło w tabeli niżej — **pierwszy pasujący wiersz od góry = aktualny krok**.
+3. Wskaż **jeden następny krok + agenta**, konkretnie i na danych (np. „masz 54 w `awaiting_selection` → potwierdź wybór w GUI"), nie ogólnikiem.
+
+| Stan bazy (ze snapshotu) | Następny krok | Agent |
+| :-- | :-- | :-- |
+| brak firm | import bazy D&B | Analityk |
+| firmy są, 0 osób gotowych (`ready_for_outreach=0`) | wzbogać (Apollo → `add-person`) + werdykt gotowości | Analityk |
+| są gotowi, brak kampanii albo kampania `zaproponowana` | otwórz / potwierdź kampanię | Analityk + Operator (GUI) |
+| `awaiting_selection > 0` (kolejka Diagnozy) | potwierdź wybór do wysyłki | Operator (GUI) |
+| są `selected`, brak draftów | przygotuj maile otwierające | Prowadzący + Autor treści |
+| należne follow-upy / breakupy (z `events`) | przygotuj ponowienia | Prowadzący |
+| `replied > 0` | sklasyfikuj odpowiedź + zrutuj | Prowadzący → Kwalifikator / Opiekun |
+| `nurture` z datą powrotu ≤ dziś | obudź kontakt (ciepły opener) | Opiekun |
+| minął tydzień od ostatniego przeglądu | synteza tygodnia + korekta | Mentor |
+
+Zasada: **jeden krok naraz** — wskazujesz najbliższe wąskie gardło, nie całą listę. Gdy pasuje kilka wierszy, bierz pierwszy od góry (najwcześniejszy w przepływie). To wymaga sesji z tym dokumentem w kontekście i dostępem do żywej bazy.
+
+---
+
 ## Jak Claude ma się tu poruszać
 
 - Rozpoznaj, w którym bloku jesteś (sygnały z tabeli wyżej), wczytaj jego SKILL.md i pracuj w jego granicach.
