@@ -21,3 +21,6 @@ yarn-error.log*
 
 # Skróty Windows — specyficzne dla maszyny (operator ma maca)
 *.lnk
+
+# Treści kampanii (karty, szablony maili) — robocze, trzymane lokalnie
+kampanie/
